@@ -38,7 +38,7 @@ jobs:
                   set -euxo pipefail
                   PYBIN=$(command -v python || command -v python3)
                   "$PYBIN" -m pip install -U pip
-                  "$PYBIN" -m pip install dist/*.whl
+                  "$PYBIN" -m pip install --find-links dist pybinwalk
                   "$PYBIN" -c "import pybinwalk; print('pybinwalk', pybinwalk.version())"
 
             - uses: actions/upload-artifact@v4

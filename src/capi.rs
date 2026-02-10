@@ -22,12 +22,6 @@ struct ScanResponse {
     file_map: Vec<ScanResult>,
 }
 
-#[derive(Serialize)]
-struct ErrorResponse {
-    success: bool,
-    error: Option<String>,
-}
-
 #[no_mangle]
 pub extern "C" fn bw_scan(data: *const c_uchar, len: usize) -> *mut c_char {
     let response = match std::panic::catch_unwind(|| {
