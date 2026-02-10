@@ -23,6 +23,8 @@ jobs:
 
             - name: Build wheels
               uses: PyO3/maturin-action@v1
+              env:
+                  RUST_FONTCONFIG_DLOPEN: "true"
               with:
                   command: build
                   args: --release --out dist --find-interpreter
