@@ -58,20 +58,22 @@ jobs:
               with:
                   name: sdist
                   path: dist/*
-
     publish:
         if: startsWith(github.ref, 'refs/tags/v')
         needs: [wheels, sdist]
         runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+        environment:
+            name: pypi
+            url: https://pypi.org/p/pybinwalk
         steps:
             - uses: actions/download-artifact@v4
               with:
-                  path: artifacts
+                  path: dist
+                  merge-multiple: true
 
             - name: Publish to PyPI
-              uses: PyO3/maturin-action@v1
-              env:
-                  MATURIN_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+              uses: pypa/gh-action-pypi-publish@release/v1
               with:
-                  command: upload
-                  args: --non-interactive --skip-existing artifacts/**/*
+                  skip-existing: true
