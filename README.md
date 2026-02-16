@@ -23,6 +23,16 @@ maturin build --release
 pip install target/wheels/pybinwalk-*.whl
 ```
 
+## Wheels
+
+Prebuilt wheels are published via GitHub Actions for:
+
+- macOS: universal2 (arm64 + x86_64)
+- Windows: x86_64
+- Linux: manylinux (x86_64)
+
+If a wheel isn’t available for your Python/platform, pip will build from source (requires Rust).
+
 ## Usage
 
 ### Scan bytes in memory
